@@ -9,7 +9,7 @@ def regexIPSearch(defaultReg):
     selectionList = re.findall(r'\d+.\d+.\d+.\d+', defaultReg)
 
     for tstValue in selectionList:
-        for x in (re.split(r'\.', tstValue)):
+        for x in tstValue.split('.'):
             if 0 <= int(x) < 256:
                 counterList.append(x in tstValue)
                 if counterList.count(True) == 4:
