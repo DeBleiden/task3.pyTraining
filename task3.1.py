@@ -1,15 +1,16 @@
 import re
 
-reg = 'Some text 192.168.1.1 with some IP addresses 10.24.3.1 and 1923.168.101.150'
+reg = '255.255.255.255 8.8.8.8 10.255.255.255 192.168.1.1 0.0.0.0 10.24.3.1 109.210.53.211 172.217.22.14'
 
 
 def regexIPSearch(string):
-    tempList = re.findall(r'\d+.\d+.\d+.\d+', string)
-    for i in tempList:
-        if len(i) > 15:
-            continue
-        else:
-            print(i)
+    # tempListTest = re.findall(r'\d+\.\d+\.\d+\.\d+', string)
+    tempListTest = re.findall(r'(((([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9])\.'
+                              r'([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9]))\.'
+                              r'([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9]))\.'
+                              r'([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9]))', string)
+    for i in tempListTest:
+        print(i[0])
 
 
 regexIPSearch(reg)
