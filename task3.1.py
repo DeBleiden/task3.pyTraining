@@ -1,16 +1,23 @@
 import re
 
-reg = '255.255.255.255 8.8.8.8 10.255.255.255 192.168.1.1 0.0.0.0 10.24.3.1 109.210.53.211 172.217.22.14'
+reg = '255.255.255.255 8.8.8.8 256.255.255.255 192.168.1.1 0.0.0.0 10.24.3.1 109.210.53.211 172.217.22.14'
+result = []
+counterList = []
 
 
-def regexIPSearch(string):
-    # tempListTest = re.findall(r'\d+\.\d+\.\d+\.\d+', string)
-    tempListTest = re.findall(r'(((([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9])\.'
-                              r'([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9]))\.'
-                              r'([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9]))\.'
-                              r'([2][0-5][0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9]))', string)
-    for i in tempListTest:
-        print(i[0])
+def regexIPSearch(defaultReg):
+    selectionList = re.findall(r'\d+.\d+.\d+.\d+', defaultReg)
+
+    for tstValue in selectionList:
+        for x in (re.split(r'\.', tstValue)):
+            if 0 <= int(x) < 256:
+                counterList.append(x in tstValue)
+                if counterList.count(True) == 4:
+                    result.append(tstValue)
+                    counterList.clear()
+            else:
+                break
+    print(result)
 
 
 regexIPSearch(reg)
